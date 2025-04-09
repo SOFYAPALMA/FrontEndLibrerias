@@ -10,7 +10,7 @@ import { Comentarios } from '../Models/Comentarios';
 export class ComentariosService {
 
   private http = inject(HttpClient);
-    private apiUrl: string = appsettings.apiUrl + "/Comentarios/ConsultarComentario";
+  private apiUrl: string = appsettings.apiUrl + "/Comentarios/ConsultarComentario";
 
   constructor() { }
 
@@ -21,6 +21,10 @@ export class ComentariosService {
   obtener(id:number){
     return this.http.get<RespuestaAPI>(`${this.apiUrl}/${id}`);
   }
+
+  // crear(objeto:Comentarios){
+  //   return this.http.post<RespuestaAPI>(this.apiUrl.objeto);
+  // }
 
   eliminar(id:number){
     return this.http.delete<RespuestaAPI>(`${this.apiUrl}/${id}`);
