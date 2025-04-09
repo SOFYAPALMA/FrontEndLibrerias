@@ -11,7 +11,7 @@ export class AuthService {
   private readonly API_URL = 'https://localhost:7033';
 
   constructor(private httpClient: HttpClient) {
-    console.log("ctr auth service");
+    console.log("ctr auth service Service");
   }
 
   iniciarSesion(usuario: Login): Observable<RespuestaAPI> {

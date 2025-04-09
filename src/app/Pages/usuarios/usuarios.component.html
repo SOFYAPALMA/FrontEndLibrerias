@@ -1,1 +1,41 @@
-<p>usuarios works!</p>
+<mat-card style="width: 40%; margin: 50px auto">
+    <mat-card-header style="background-color: black; color: white">
+    <mat-card-title><p>Visualizacion de libros</p></mat-card-title>
+</mat-card-header>
+<mat-card-content>
+    <div class="header-container">
+        <h2>Biblioteca</h2>              
+      </div>
+
+    <table
+      mat-table
+      [dataSource]="listaUsuarios"
+      matSort
+      class="mat-elevation-z5"
+      style="margin: top 50px"
+    >
+    
+    <!-- id Column -->
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+        <td mat-cell *matCellDef="let row">{{ row.id }}</td>
+      </ng-container>
+
+      <!-- nombre Column -->
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+        <td mat-cell *matCellDef="let row">{{ row.nombre }}</td>
+      </ng-container>     
+    
+    </table>
+    <br><div class="container-auth-form-btn">
+      <div style="text-align:center">
+        <button mat-raised-button color="primary" [class.auth-spinner]="loading" [disabled]="loading"
+        class="auth-form-btn" (click)="Ir()">Crear Producto</button>
+      </div>
+    </div> 
+    
+</mat-card-content>
+
+
+

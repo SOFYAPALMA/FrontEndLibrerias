@@ -12,7 +12,7 @@ import { appsettings } from '../Settings/appsettings';
 export class UsuariosService {
 
   private http = inject(HttpClient);
-  private apiUrl: string = appsettings.apiUrl + "/Usuarios/CrearUsuario";
+  private apiUrl: string = appsettings.apiUrl + "Usuarios/CrearUsuario";
 
   constructor() {}
 

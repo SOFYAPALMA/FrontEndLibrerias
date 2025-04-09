@@ -1,57 +1,61 @@
-import { Component, inject, OnInit } from '@angular/core';
-import {MatCardModule} from '@angular/material/card';
+import { ChangeDetectionStrategy, Component, inject, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
-import { LibrosService } from '../../Services/libros.service';
 import { Router } from '@angular/router';
 import { MatSort, MatSortModule } from '@angular/material/sort';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { LibrosService } from '../../Services/libros.service';
 import { Libros } from '../../Models/Libros';
 
-
 @Component({
-  selector: 'libros-inicio',
+  selector: 'app-libros',
   standalone: true,
   imports: [
     MatCardModule,
+    MatPaginatorModule,
     MatTableModule,
     MatButtonModule,
     MatSortModule,
-    RouterModule
-
+    MatPaginator,
   ],
-  templateUrl: './libros.component.html',
-  styleUrl: './libros.component.css'
-})
-export class LibrosComponent implements OnInit {
   
-  private librosService = inject(LibrosService);
+  templateUrl:'./libros.component.html',
+  styleUrl:'./libros.component.css',
+})
+
+export class LibrosComponent implements OnInit, AfterViewInit {
+  
+  private librosServicio = inject(LibrosService);
   public listaLibros: MatTableDataSource<Libros> = new MatTableDataSource<Libros>();
   public displayedColumns: string[] = [
-
-    'id',
+ 
     'nombre',
+    'autor',
   ];
-   
-  submitted = false;
-  loading = false;
-  error = '';
-  hide = true;  
-  
-  constructor(private router: Router){}
 
-  ngOnInit(): void {
-    this.listadoLibros();
+  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+  @ViewChild(MatSort) sort: MatSort | undefined;
 
-    console.log('S1', this.listaLibros);
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+    this.obtenerLibros();
   }
 
-  listadoLibros() {
-    
-    this.librosService.lista().subscribe({
+  ngAfterViewInit() {
+    if (this.paginator) {
+      this.listaLibros.paginator = this.paginator;
+    }
+    if (this.sort) {
+      this.listaLibros.sort = this.sort;
+    }
+  }
+
+  obtenerLibros() {
+    this.librosServicio.lista().subscribe({
       next: (res) => {
-        console.log('S1', this.listaLibros);
         console.log(res);
         if (res && res.data) {
           this.listaLibros.data = res.data; 
@@ -63,9 +67,11 @@ export class LibrosComponent implements OnInit {
     });
   }
 
-  Ir() {
-    console.log("Ir");
-    this.router.navigate(['/comentarios']);
-  }
+  // nuevo(id: string) {
+  //   this.router.navigate(['/comentarios'], { queryParams: { id: id ?? '0' } });
+  // }
 
+  ver(name: string) {
+    this.router.navigate(['/comentarios'], { queryParams: { username: name } });
+  }
 }

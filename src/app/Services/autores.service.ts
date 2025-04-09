@@ -9,7 +9,7 @@ import { Autores } from '../Models/Autores';
 })
 export class AutoresService {
   private http = inject(HttpClient);
-  private apiUrl: string = appsettings.apiUrl + "/Autor/ConsultarAutores";
+  private apiUrl: string = appsettings.apiUrl + "Autor/ConsultarAutores";
 
   constructor() { }
 

@@ -9,13 +9,13 @@ import { AuthService } from '../../Services/login.service';
 
 export class AuthGuard {
   constructor(private authService: AuthService, private router: Router) {
-    //console.log("ctor guard");
+    console.log("ctor guard");
    }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    //console.log("canActivate guard");
-    //console.log("state", state.url);
+    console.log("canActivate guard");
+    console.log("state", state.url);
 
     if (state.url.startsWith('/login')) {
       return true;

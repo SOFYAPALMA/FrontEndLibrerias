@@ -10,7 +10,7 @@ import { Comentarios } from '../Models/Comentarios';
 export class ComentariosService {
 
   private http = inject(HttpClient);
-  private apiUrl: string = appsettings.apiUrl + "/Comentarios/ConsultarComentario";
+  private apiUrl: string = appsettings.apiUrl + "Comentarios/ConsultarComentario";
 
   constructor() { }
 

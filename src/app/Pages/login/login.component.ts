@@ -48,8 +48,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
 
     this.authForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required], 
+      correo: ['', [Validators.required, Validators.email]],
+      clave: ['', Validators.required], 
     });
   }
 
@@ -67,12 +67,13 @@ export class LoginComponent implements OnInit {
       this.loading = false;
       return;
     } else {  
+      console.log('Datos enviados:', this.authForm.value);
       this.authService.iniciarSesion(this.authForm.value).subscribe({
         next: (response: RespuestaAPI) => {
           if(response.success)
           {
             console.log('Login exitoso', response.data);
-            localStorage.setItem('jwt', response.data.toString());
+            //localStorage.setItem('jwt', response.data.toString());
             this.router.navigate(['/libros']);
           }
           else

@@ -9,12 +9,11 @@ import { Libros } from '../Models/Libros';
 })
 export class LibrosService {
     private http = inject(HttpClient);
-    private apiUrl: string = appsettings.apiUrl + "/Libros/ConsultarLibros";
+    private apiUrl: string = appsettings.apiUrl + "Libros/ConsultarLibros";
 
   constructor() { }
 
-    lista(){
-  
+    lista(){  
       return this.http.get<RespuestaAPI>(this.apiUrl);
     }
 
