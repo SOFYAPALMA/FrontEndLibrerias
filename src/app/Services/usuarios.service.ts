@@ -1,50 +1,31 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { RespuestaAPI } from '../Models/RespuestaAPI';
-import { Login } from '../Models/Usuarios';
+import { Login } from '../Models/Login';
+import { Usuarios } from '../Models/Usuarios';
+import { appsettings } from '../Settings/appsettings';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  private readonly API_URL = 'https://localhost:7033';
+export class UsuariosService {
 
-  constructor(private httpClient: HttpClient) {
-    console.log("ctr auth service");
+  private http = inject(HttpClient);
+  private apiUrl: string = appsettings.apiUrl + "/Usuarios/CrearUsuario";
+
+  constructor() {}
+
+  lista(){
+    return this.http.get<RespuestaAPI>(this.apiUrl);
   }
 
-  iniciarSesion(usuario: Login): Observable<RespuestaAPI> {
-    console.log(' auth 1', usuario);
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-    };
-
-    return new Observable((subscriber) => {
-      this.httpClient
-        .post<RespuestaAPI>(
-          this.API_URL +
-            '/Validate?Email=' +
-            usuario.correo +
-            '&Clave=' +
-            usuario.clave,
-          {}
-        )
-        .subscribe((data) => {
-          //some stuff
-          console.log('auth service', data);
-          subscriber.next(data);
-        });
-    });
+  obtener(id:number){
+    return this.http.get<RespuestaAPI>(`${this.apiUrl}/${id}`);
   }
 
-  logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('jwt');
-    return of({ success: false });
-  }
+  // crear(objeto:Usuarios){
+  //   return this.http.post<RespuestaAPI>(this.apiUrl.objeto);
+  // }  
 }
 
