@@ -29,10 +29,10 @@ export class LibrosComponent implements OnInit, AfterViewInit {
   
   private librosServicio = inject(LibrosService);
   public listaLibros: MatTableDataSource<Libros> = new MatTableDataSource<Libros>();
-  public displayedColumns: string[] = [
- 
+  public displayedColumns: string[] = [ 
     'nombre',
-    'autor',
+    'nombreAutor',
+    'id'
   ];
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
@@ -54,6 +54,7 @@ export class LibrosComponent implements OnInit, AfterViewInit {
   }
 
   obtenerLibros() {
+    
     this.librosServicio.lista().subscribe({
       next: (res) => {
         console.log(res);
@@ -67,11 +68,8 @@ export class LibrosComponent implements OnInit, AfterViewInit {
     });
   }
 
-  // nuevo(id: string) {
-  //   this.router.navigate(['/comentarios'], { queryParams: { id: id ?? '0' } });
-  // }
-
   ver(name: string) {
-    this.router.navigate(['/comentarios'], { queryParams: { username: name } });
+    console.log('id', name);
+    this.router.navigate(['/librosdetalle'], { queryParams: {id: name } });
   }
 }

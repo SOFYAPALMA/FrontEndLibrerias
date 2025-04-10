@@ -1,1 +1,95 @@
-<p>comentarios works!</p>
+<mat-card style="width: 40%; margin: 50px auto">
+  <div class="auth-container">
+    <div
+      class="row auth-main justify-content-center align-items-center"
+      style="min-height: 100vh"
+    >
+      <div class="col-sm-6 col-md-4">
+        <!-- Card Container -->
+        <mat-card class="auth-card">
+          <div class="auth-wrapper">
+            <h2 class="welcome-msg text-center">Comentarios</h2>
+            <h4 class="login-title text-center">
+              Deja aqui tu comentario
+            </h4>
+
+            <!-- Formulario de Nuevo -->
+            <form
+              class="validate-form"
+              [formGroup]="authForm"
+              (ngSubmit)="onSubmit()"
+            >
+              <div class="row">               
+
+                <!-- <div class="col-12 mb-2">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Nombre de Libro</mat-label>
+                    <input matInput formControlName="nombre" />
+                    <mat-icon class="material-icons-outlined p-3" matSuffix
+                      >box</mat-icon
+                    >
+                    <mat-error *ngIf="f['nombre']?.hasError('required')">campo requerido</mat-error>
+                      <mat-error *ngIf="f['nombre']?.hasError('precio')">campo no válido</mat-error>
+                  </mat-form-field>                  
+                </div>    -->
+                
+                <div class="col-12 mb-2">
+                  <mat-form-field
+                    class="example-full-width"
+                    appearance="outline"
+                  >
+                    <mat-label>Comentar</mat-label>
+                    <input matInput formControlName="comentario" />
+                    <mat-icon class="material-icons-outlined p-3" matSuffix
+                      >box</mat-icon
+                    >
+                    <mat-error *ngIf="f['comentario']?.hasError('required')">campo requerido</mat-error>
+                      <mat-error *ngIf="f['comentario']?.hasError('comentario')">campo no válido</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-12 mb-2">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Autor</mat-label>
+                    <mat-select formControlName="idautor" name="idautor">
+                      @for (cat of this.autores; track cat) {
+                      <mat-option [value]="cat.id">
+                        {{ cat.nombre }}
+                      </mat-option>
+                      
+                      }
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <!-- Mostrar mensaje de error -->
+              <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
+                {{ error }}
+              </div>
+              <br />
+
+              <div class="container-auth-form-btn">
+                <div style="text-align: center">
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    [class.auth-spinner]="loading"
+                    [disabled]="loading"
+                    class="auth-form-btn"
+                    type="submit"
+                  >
+                    Guardar Comentario
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </div></mat-card
+>

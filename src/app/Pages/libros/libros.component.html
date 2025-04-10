@@ -1,4 +1,4 @@
-<mat-card style="width: 60%; margin: 50px auto">
+<mat-card style="width: 50%; margin: 50px auto">
     <mat-card-header style="background-color: black; color: white">
       <mat-card-title><p>Visualizacion de libros</p></mat-card-title>
     </mat-card-header>
@@ -18,22 +18,24 @@
         class="mat-elevation-z5"
         style="margin: top 50px"
       >
-    
-  
-        <!-- autor Column -->
+        <!-- nombre Column -->
         <ng-container matColumnDef="nombre">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
           <td mat-cell *matCellDef="let row">{{ row.nombre }}</td>
         </ng-container>
+
+        <ng-container matColumnDef="nombreAutor">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Autor</th>
+          <td mat-cell *matCellDef="let row">{{ row.nombreAutor }}</td>
+        </ng-container>
   
         <!-- autor Column -->
-        <ng-container matColumnDef="autor">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Autor</th>
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
           <td mat-cell *matCellDef="let row">
-            {{ row.nextPredictedOrder }}
             <div class="button-container">
-              <button mat-flat-button class="green-text" (click)="ver(row.autor)">
-                VER DETALLES
+              <button mat-flat-button class="green-text" (click)="ver(row.id)">
+                DETALLES
               </button>              
             </div>
           </td>

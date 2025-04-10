@@ -13,7 +13,8 @@ export class LibrosService {
 
   constructor() { }
 
-    lista(){  
+    lista(){
+  
       return this.http.get<RespuestaAPI>(this.apiUrl);
     }
 
@@ -22,6 +23,7 @@ export class LibrosService {
     }
   
     getLibros() {
-      return this.http.get<Libros>(this.apiUrl);
+      return this.http.get<RespuestaAPI>(this.apiUrl);
     }
+    
   }
