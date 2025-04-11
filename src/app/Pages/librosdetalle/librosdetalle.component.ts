@@ -46,14 +46,13 @@ export class LibrosDetalleComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-    const id = this.route.snapshot.queryParamMap.get('id');
-    this.route.paramMap.subscribe(params => {
-      console.log('S1 ID obtenido:', id);
+    this.route.queryParamMap.subscribe(params => {
+      const id = params.get('id');
+      console.log('ID obtenido:', id);
       if (id) {
         this.obtenerLibroid(id);
-        console.log('Respuesta:', this.librosid);
       } else {
-        console.log('S2 ID no encontrado');
+        console.log('ID no encontrado');
       }
     });
   }
@@ -90,11 +89,11 @@ export class LibrosDetalleComponent implements OnInit {
   }
 
   ver(id: number) {
-    this.router.navigate(['/comentarios'], { queryParams: { id: id ?? '0'  } });
+    this.router.navigate(['comentarios'], { queryParams: { id: id ?? '0'  } });
   }
 
   retornar() {
-    this.router.navigate(['/libros'], { queryParams: { 
+    this.router.navigate(['libros'], { queryParams: { 
     } });
   }
 
@@ -103,12 +102,20 @@ export class LibrosDetalleComponent implements OnInit {
       console.log(this.libros.value);
     }
   }
+  verComentarios(libroId: number, autorId: number) {
+    this.router.navigate(['comentarios', { libroId, autorId }]);
+  }
   
   nuevoComentario() {
     if (this.librosid?.id) {
-      this.router.navigate(['/comentarios'], { 
-        queryParams: { libroId: this.librosid.id }
-      });
-    }
+    this.router.navigate(['comentarios'], { 
+      queryParams: { 
+        libroId: this.librosid.id,
+        idAutor: this.librosid.idAutor 
+      }
+    });
+  } else {
+    console.error('No se pudo obtener el ID del libro');
   }
+}
 }

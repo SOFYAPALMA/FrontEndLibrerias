@@ -15,6 +15,10 @@ export const routes: Routes = [
   { path: 'librosdetalle', canActivate: [AuthGuard], component: LibrosDetalleComponent },
   { path: 'usuarios', canActivate: [AuthGuard], component: UsuariosComponent },
   { path: 'comentarios', canActivate: [AuthGuard], component: ComentariosComponent },
+  { 
+    path: 'comentarios/:libroId/:autorId', 
+    component: ComentariosComponent 
+  },
   { path: 'login', component: LoginComponent },
   {
     path: 'libros/:id',

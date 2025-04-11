@@ -4,14 +4,12 @@
       class="row auth-main justify-content-center align-items-center"
       style="min-height: 100vh"
     >
-      <div class="col-sm-6 col-md-4">
+      <div class="col-sm-10 col-md-4">
         <!-- Card Container -->
         <mat-card class="auth-card">
           <div class="auth-wrapper">
             <h2 class="welcome-msg text-center">Comentarios</h2>
-            <h4 class="login-title text-center">
-              Deja aqui tu comentario
-            </h4>
+            <h4 class="login-title text-center">Deja aqui tu comentario</h4>
 
             <!-- Formulario de Nuevo -->
             <form
@@ -19,49 +17,21 @@
               [formGroup]="authForm"
               (ngSubmit)="onSubmit()"
             >
-              <div class="row">               
-
-                <!-- <div class="col-12 mb-2">
-                  <mat-form-field
-                    class="example-full-width"
-                    appearance="outline"
-                  >
-                    <mat-label>Nombre de Libro</mat-label>
-                    <input matInput formControlName="nombre" />
-                    <mat-icon class="material-icons-outlined p-3" matSuffix
-                      >box</mat-icon
-                    >
-                    <mat-error *ngIf="f['nombre']?.hasError('required')">campo requerido</mat-error>
-                      <mat-error *ngIf="f['nombre']?.hasError('precio')">campo no válido</mat-error>
-                  </mat-form-field>                  
-                </div>    -->
-                
-                <div class="col-12 mb-2">
+              <div class="row">
+                <div class="col-18 mb-6">
                   <mat-form-field
                     class="example-full-width"
                     appearance="outline"
                   >
                     <mat-label>Comentar</mat-label>
-                    <input matInput formControlName="comentario" />
+                    <input matInput formControlName="comentarios" />
+
                     <mat-icon class="material-icons-outlined p-3" matSuffix
                       >box</mat-icon
                     >
-                    <mat-error *ngIf="f['comentario']?.hasError('required')">campo requerido</mat-error>
-                      <mat-error *ngIf="f['comentario']?.hasError('comentario')">campo no válido</mat-error>
-                  </mat-form-field>
-                </div>
-
-                <div class="col-12 mb-2">
-                  <mat-form-field class="example-full-width">
-                    <mat-label>Autor</mat-label>
-                    <mat-select formControlName="idautor" name="idautor">
-                      @for (cat of this.autores; track cat) {
-                      <mat-option [value]="cat.id">
-                        {{ cat.nombre }}
-                      </mat-option>
-                      
-                      }
-                    </mat-select>
+                    <mat-error *ngIf="f['comentarios']?.hasError('required')"
+                      >Campo requerido</mat-error
+                    >
                   </mat-form-field>
                 </div>
               </div>

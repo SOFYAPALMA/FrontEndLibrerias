@@ -9,9 +9,17 @@ import { Login } from '../Models/Login';
 })
 export class AuthService {
   private readonly API_URL = 'https://localhost:7033';
+  private currentUser: any = null;
 
   constructor(private httpClient: HttpClient) {
     console.log("ctr auth service Service");
+    this.loadCurrentUser();
+  }
+  private loadCurrentUser(): void {
+    const userData = localStorage.getItem('currentUser');
+    if (userData) {
+      this.currentUser = JSON.parse(userData);
+    }
   }
 
   iniciarSesion(usuario: Login): Observable<RespuestaAPI> {

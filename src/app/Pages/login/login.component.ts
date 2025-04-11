@@ -73,8 +73,9 @@ export class LoginComponent implements OnInit {
           if(response.success)
           {
             console.log('Login exitoso', response.data);
-            //localStorage.setItem('jwt', response.data.toString());
-            this.router.navigate(['/libros']);
+            localStorage.setItem('jwt', response.data.toString());
+            localStorage.setItem('id', response.data.toString());
+            this.router.navigate(['libros']);
           }
           else
           {
@@ -92,7 +93,7 @@ export class LoginComponent implements OnInit {
 
   Ir() {
     console.log("Ir");
-    this.router.navigate(['/libros']);
+    this.router.navigate(['libros']);
   }
 }
 

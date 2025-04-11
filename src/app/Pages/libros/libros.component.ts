@@ -70,6 +70,6 @@ export class LibrosComponent implements OnInit, AfterViewInit {
 
   ver(name: string) {
     console.log('id', name);
-    this.router.navigate(['/librosdetalle'], { queryParams: {id: name } });
+    this.router.navigate(['librosdetalle'], { queryParams: {id: name } });
   }
 }

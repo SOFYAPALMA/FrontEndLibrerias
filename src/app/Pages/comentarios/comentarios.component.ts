@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   ReactiveFormsModule,
   UntypedFormBuilder,
@@ -16,11 +16,8 @@ import { Subscription } from 'rxjs';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-import { Autores } from '../../Models/Autores';
 import { ComentariosService } from '../../Services/comentarios.service';
-import { AutoresService } from '../../Services/autores.service';
-import { Libros } from '../../Models/Libros';
-import { LibrosService } from '../../Services/libros.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-comentarios',
@@ -45,79 +42,60 @@ import { LibrosService } from '../../Services/libros.service';
 export class ComentariosComponent implements OnInit {
   subscription: Subscription = new Subscription();
   authForm!: UntypedFormGroup;
+  libroId!: number;
 
   submitted = false;
   loading = false;
   error = '';
   hide = true;
-  autores: Autores[] = [];
-  libros: Libros[] = [];
 
   constructor(
     private formBuilder: UntypedFormBuilder,
     private router: Router,
     private comentariosService: ComentariosService,
-    private autoresService: AutoresService,
-    private librosService: LibrosService
-    
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
-    this.getAutores();
+    this.route.queryParamMap.subscribe((params) => {
+      this.libroId = parseInt(params.get('libroId') || '0');
+    });
 
-    this.authForm = this.formBuilder.group({     
+    console.log('mostrar id libro / autor:', this.libroId);
+
+    this.authForm = this.formBuilder.group({
       comentarios: ['', Validators.required],
-  
-    });    
+      idUsuario: parseInt(localStorage.getItem('id') || '0'),
+      idLibro: this.libroId || 0,
+    });
   }
 
-  get f() { return this.authForm.controls; }
-
-  getAutores() {
-    this.autoresService.getAutores().subscribe({
-      next: (result: any) => {
-        console.log('S3', result);
-        if (result.success) {
-          this.autores = result.data;
-          console.log('S5', this.autores);
-        } else {
-          console.error('Error al cargar los autores:', result.message);
-        }
-      },
-      error: (error: any) => {
-        console.error('Error al obtener los datos de autores:', error);
-      },
-    });
+  get f() {
+    return this.authForm.controls;
   }
 
   onSubmit() {
     this.submitted = true;
-    this.loading = true;
-    this.error = '';
 
     if (this.authForm.invalid) {
       this.error = 'Error en la creacion de nuevo comentario.';
-      this.loading = false;
       return;
-    } else {
-      this.comentariosService.obtener(this.authForm.value).subscribe({
-        next: (response: any) => {
-          this.router.navigate(['/librosdetalle']);
-        },
-        error: () => {
-          this.error = 'Error al crear el producto';
-          this.loading = false;
-        },
-      });
     }
-  }
 
-  nuevo() {
-    this.router.navigate(['/comentarios']);
-  }
+    this.loading = true;
+    this.error = '';
 
-  Guardar() {
-    console.log('Guardar');
-    this.router.navigate(['/librosdetalle']);
+    this.comentariosService.nuevoComentario(this.authForm.value).subscribe({
+      next: (response: any) => {
+        console.log('Comentario creado exitosamente', response);
+        this.router.navigate(['librosdetalle'], {
+          queryParams: { id: this.libroId },
+        });
+      },
+      error: (error: HttpErrorResponse) => {
+        this.error = error.error?.message || 'Error al crear el comentario';
+        this.loading = false;
+      },
+    });
   }
 }
