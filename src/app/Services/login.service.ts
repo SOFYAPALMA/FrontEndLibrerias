@@ -10,6 +10,7 @@ import { Login } from '../Models/Login';
 export class AuthService {
   private readonly API_URL = 'https://localhost:7033';
   private currentUser: any = null;
+  router: any;
 
   constructor(private httpClient: HttpClient) {
     console.log("ctr auth service Service");
@@ -47,12 +48,7 @@ export class AuthService {
           subscriber.next(data);
         });
     });
-  }
-
-  logout() {
-    // remove user from local storage to log user out
-    localStorage.removeItem('jwt');
-    return of({ success: false });
-  }
+  }  
+  
 }
 

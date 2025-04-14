@@ -1,5 +1,15 @@
-mat-card {
-    
-    text-align: center;
-  
+mat-card {    
+    text-align: center;  
 }
+
+.auth-form-btn {
+    background-color:rgba(218, 161, 38, 0.877)!important;
+    color: white !important;
+  }
+
+.retornar-btn {
+    background-color:rgba(6, 80, 190, 0.945)!important;
+    color: white !important;
+}
+
+  

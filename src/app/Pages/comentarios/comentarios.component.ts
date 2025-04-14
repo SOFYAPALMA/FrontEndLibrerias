@@ -97,5 +97,10 @@ export class ComentariosComponent implements OnInit {
         this.loading = false;
       },
     });
+
+    // retornar() {
+    //   this.router.navigate(['librosdetalle'], { queryParams: { 
+    //   } });
+    // }    
   }
 }

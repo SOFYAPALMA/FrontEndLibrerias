@@ -12,11 +12,10 @@
     margin: 4em auto;
     text-align: center;
     background-color: rgb(241, 247, 248);  /* Cambié el fondo a blanco */
-      
-}
+  }
 
+  .mat-flat-button {
+    background-color: rgb(241, 247, 248);
+  }
 
-        
-    
-
- 
+  

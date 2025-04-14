@@ -95,5 +95,13 @@ export class LoginComponent implements OnInit {
     console.log("Ir");
     this.router.navigate(['libros']);
   }
+
+  usuario(id: number) {
+    this.router.navigate(['usuarios'], { queryParams: { id: id ?? '0'  } });
+  }
+
+  contrasena(id: number) {
+    this.router.navigate(['usuarios'], { queryParams: { id: id ?? '0'  } });
+  }
 }
 

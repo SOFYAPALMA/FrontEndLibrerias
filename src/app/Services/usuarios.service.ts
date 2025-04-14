@@ -12,20 +12,47 @@ import { appsettings } from '../Settings/appsettings';
 export class UsuariosService {
 
   private http = inject(HttpClient);
-  private apiUrl: string = appsettings.apiUrl + "Usuarios/CrearUsuario";
+  private apiUrl: string = appsettings.apiUrl + "Usuarios";
 
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
 
   lista(){
+    console.log(this.apiUrl);
     return this.http.get<RespuestaAPI>(this.apiUrl);
   }
 
-  obtener(id:number){
-    return this.http.get<RespuestaAPI>(`${this.apiUrl}/${id}`);
+  getUsuarios() {
+    console.log('S2',this.apiUrl + '/ConsultarUsuarios');
+    return this.http.get<Usuarios>(this.apiUrl + '/ConsultarUsuarios');
   }
 
-  // crear(objeto:Usuarios){
-  //   return this.http.post<RespuestaAPI>(this.apiUrl.objeto);
-  // }  
+  nuevoUsuario(value: Usuarios) : Observable<RespuestaAPI> {
+    console.log(' nuevo 1', value);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+
+    return new Observable((subscriber) => {
+      this.httpClient
+        .post<RespuestaAPI>(
+          this.apiUrl + '/CrearUsuario',
+           value 
+        )
+        .subscribe((data: RespuestaAPI) => {
+          
+          console.log('user service', data);
+          subscriber.next(data);
+        });
+    });
+  }
+
+  salir(): void {
+    // Eliminar token/localStorage/sessionStorage
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  }
+
 }
 

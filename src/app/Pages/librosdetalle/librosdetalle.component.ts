@@ -29,7 +29,7 @@ import { Comentarios } from '../../Models/Comentarios';
     MatButtonModule,
     MatSortModule,
     CommonModule,    
-    //MatPaginator,
+    
   ],
 
   templateUrl: './librosdetalle.component.html',
@@ -101,9 +101,6 @@ export class LibrosDetalleComponent implements OnInit {
     if (this.libros.valid) {
       console.log(this.libros.value);
     }
-  }
-  verComentarios(libroId: number, autorId: number) {
-    this.router.navigate(['comentarios', { libroId, autorId }]);
   }
   
   nuevoComentario() {

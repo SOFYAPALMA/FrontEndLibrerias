@@ -1,16 +1,19 @@
-<mat-card style="width: 40%; margin: 50px auto">
+<mat-card style="width: 30%; margin: 50px auto">
+  <mat-card-header
+    style="background-color:#00897B; color: rgb(247, 250, 252)"
+  >
+    <mat-card-title><h1>Comentar</h1></mat-card-title>
+  </mat-card-header>
   <div class="auth-container">
     <div
       class="row auth-main justify-content-center align-items-center"
       style="min-height: 100vh"
     >
-      <div class="col-sm-10 col-md-4">
+      <div class="col-sm-12 col-md-8">
         <!-- Card Container -->
         <mat-card class="auth-card">
-          <div class="auth-wrapper">
-            <h2 class="welcome-msg text-center">Comentarios</h2>
-            <h4 class="login-title text-center">Deja aqui tu comentario</h4>
-
+          <div class="auth-wrapper">           
+            <h3 class="login-title text-center">Deja aquí tu comentario</h3>
             <!-- Formulario de Nuevo -->
             <form
               class="validate-form"
@@ -19,19 +22,11 @@
             >
               <div class="row">
                 <div class="col-18 mb-6">
-                  <mat-form-field
-                    class="example-full-width"
-                    appearance="outline"
-                  >
+                  <mat-form-field class="example-full-width" appearance="outline" style="width: 100%;">
                     <mat-label>Comentar</mat-label>
                     <input matInput formControlName="comentarios" />
-
-                    <mat-icon class="material-icons-outlined p-3" matSuffix
-                      >box</mat-icon
-                    >
-                    <mat-error *ngIf="f['comentarios']?.hasError('required')"
-                      >Campo requerido</mat-error
-                    >
+                    <mat-icon class="material-icons-outlined p-3" matSuffix>box</mat-icon>
+                    <mat-error *ngIf="f['comentarios']?.hasError('required')">Campo requerido</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -51,10 +46,10 @@
                     [disabled]="loading"
                     class="auth-form-btn"
                     type="submit"
-                  >
-                    Guardar Comentario
-                  </button>
+                  >Guardar Comentario
+                  </button>                  
                 </div>
+                <!-- <button type="button" mat-raised-button class="retornar-btn" (click)="retornar()">Retornar</button> -->
               </div>
             </form>
           </div>

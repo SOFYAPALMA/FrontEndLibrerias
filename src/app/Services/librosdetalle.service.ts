@@ -21,7 +21,4 @@ export class LibrosDetalleService {
     return this.http.get<RespuestaAPI>(`${this.apiUrl}?id=${id}`);
   }
 
-  // getLibros() {
-  //   return this.http.get<Libros>(this.apiUrl);
-  // }
 }
