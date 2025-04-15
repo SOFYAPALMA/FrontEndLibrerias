@@ -1,7 +1,7 @@
 .logout-btn {
     display: flex;
     align-items: center;
-    gap: 4px; /* espacio entre el ícono y el texto */
+    gap: 0px; /* espacio entre el ícono y el texto */
   }
   
   .logout-text {

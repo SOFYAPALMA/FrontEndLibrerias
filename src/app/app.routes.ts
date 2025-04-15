@@ -10,7 +10,7 @@ import { LibrosDetalleComponent } from './Pages/librosdetalle/librosdetalle.comp
 
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },    
-  { path: '', canActivate: [AuthGuard], component: LibrosComponent },
+  //{ path: '', canActivate: [AuthGuard], component: LibrosComponent },
   { path: 'libros', canActivate: [AuthGuard], component: LibrosComponent },
   { path: 'librosdetalle', canActivate: [AuthGuard], component: LibrosDetalleComponent },
   { path: 'usuarios', canActivate: [AuthGuard], component: UsuariosComponent },
@@ -25,4 +25,5 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     component: LibrosComponent,
   },
+
 ];

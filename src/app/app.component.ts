@@ -34,11 +34,12 @@ export class AppComponent {
       private authService: AuthService,
       private snackBar: MatSnackBar
     ) { }
+    
   logout() {
 
     console.log("Se cierra sesion");
     
-    this.authService.logout(); // Llama a tu servicio de logout
+    this.authService.logout(); // Llama el servicio de logout
     this.snackBar.open('Sesión cerrada correctamente', 'Cerrar', {
       duration: 3000
     });
