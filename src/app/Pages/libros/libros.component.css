@@ -6,15 +6,25 @@
     color: red !important; /* Cambia el color del texto a rojo */
   }
 
-  .logout-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 100;
-    color: white;
-    background-color: rgba(255, 255, 255, 0.2);
+
+  .logout-btn {
+    transition: all 0.3s ease;
   }
   
-  .logout-button:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+  .logout-btn:hover {
+    transform: scale(1.1);
+    background-color: rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  .mat-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+    padding: 0 20px 20px;
+    align-items: center;
   }

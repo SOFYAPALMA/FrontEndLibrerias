@@ -1,6 +1,6 @@
 <mat-card style="width: 40%; margin: 50px auto">
     <mat-card-header style="background-color: #455A64; color: white">          
-      <mat-card-title><h1>Visualizacion de libros</h1></mat-card-title>
+      <mat-card-title><h1>Visualizacion de libros</h1></mat-card-title>        
     </mat-card-header>
   
     <mat-card-content>
@@ -44,7 +44,6 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
-  
       <mat-paginator
       [pageSizeOptions]="[10, 20]"
       [pageSize]="10"

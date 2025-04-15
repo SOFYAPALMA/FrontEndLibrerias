@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { RespuestaAPI } from '../Models/RespuestaAPI';
 import { Login } from '../Models/Login';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +12,12 @@ import { Login } from '../Models/Login';
 export class AuthService {
   private readonly API_URL = 'https://localhost:7033';
   private currentUser: any = null;
-  router: any;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+    private snackBar: MatSnackBar) {
+
     console.log("ctr auth service Service");
     this.loadCurrentUser();
   }
@@ -48,7 +53,20 @@ export class AuthService {
           subscriber.next(data);
         });
     });
-  }  
+  } 
   
+  logout() {
+    // Limpiar datos de sesión
+    localStorage.removeItem('token');
+    localStorage.removeItem('userData');
+
+    // Notificación
+    this.snackBar.open('Sesión cerrada correctamente', 'Cerrar', {
+      duration: 3000
+    });
+    // Redirigir al login
+    this.router.navigate(['/login']);
+  }
 }
+
 

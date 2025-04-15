@@ -8,6 +8,12 @@ import { Router } from '@angular/router';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { LibrosService } from '../../Services/libros.service';
 import { Libros } from '../../Models/Libros';
+import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from '../../Services/login.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-libros',
@@ -18,7 +24,9 @@ import { Libros } from '../../Models/Libros';
     MatTableModule,
     MatButtonModule,
     MatSortModule,
-    MatPaginator,
+    MatIconModule,
+    MatSnackBarModule,
+    MatDialogModule 
   ],
   
   templateUrl:'./libros.component.html',
@@ -37,8 +45,13 @@ export class LibrosComponent implements OnInit, AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
   @ViewChild(MatSort) sort: MatSort | undefined;
+  snackBar: any;
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private dialog: MatDialog,
+    private authService: AuthService
+  ) { }
 
   ngOnInit() {
     this.obtenerLibros();
@@ -72,6 +85,6 @@ export class LibrosComponent implements OnInit, AfterViewInit {
     console.log('id', name);
     this.router.navigate(['librosdetalle'], { queryParams: {id: name } });
   }
-  
-  
+
+    
 }
