@@ -1,43 +1,48 @@
-
 import { Component, OnInit } from '@angular/core';
-import { MatCardModule } from '@angular/material/card'; 
+import { MatCardModule } from '@angular/material/card';
 import { Router } from '@angular/router';
-import { ReactiveFormsModule, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';           
+import {
+  ReactiveFormsModule,
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Subscription } from 'rxjs';  
+import { Subscription } from 'rxjs';
 import { AuthService } from '../../Services/login.service';
 import { RespuestaAPI } from '../../Models/RespuestaAPI';
+import { AuthResponse } from '../../Models/AuthResponse';
+import { Parser } from '@angular/compiler';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   standalone: true,
-  imports: [ 
+  imports: [
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
     CommonModule,
     MatCardModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
   ],
 })
-
 export class LoginComponent implements OnInit {
   subscription: Subscription = new Subscription();
   authForm!: UntypedFormGroup;
- 
+  auth!: AuthResponse;
+
   submitted = false;
   loading = false;
   error = '';
-  hide = true;  
-
+  hide = true;
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -46,39 +51,37 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
     this.authForm = this.formBuilder.group({
       correo: ['', [Validators.required, Validators.email]],
-      clave: ['', Validators.required], 
+      clave: ['', Validators.required],
     });
   }
 
-
-  get f() { return this.authForm.controls; }
+  get f() {
+    return this.authForm.controls;
+  }
 
   onSubmit() {
     this.submitted = true;
     this.loading = true;
     this.error = '';
 
-   
     if (this.authForm.invalid) {
       this.error = 'Usuario y/o contraseña invalida';
       this.loading = false;
       return;
-    } else {  
+    } else {
       console.log('Datos enviados:', this.authForm.value);
       this.authService.iniciarSesion(this.authForm.value).subscribe({
         next: (response: RespuestaAPI) => {
-          if(response.success)
-          {
+          if (response.success) {
             console.log('Login exitoso', response.data);
-            localStorage.setItem('jwt', response.data.toString());
-            localStorage.setItem('id', response.data.toString());
+            this.auth = JSON.parse(JSON.stringify(response.data));
+            console.log('t exitoso', this.auth);
+            localStorage.setItem('jwt', this.auth.token);
+            localStorage.setItem('id', this.auth.usuario);
             this.router.navigate(['libros']);
-          }
-          else
-          {
+          } else {
             this.error = 'Usuario y/o contraseña incorrectos';
             this.loading = false;
           }
@@ -86,22 +89,21 @@ export class LoginComponent implements OnInit {
         error: () => {
           this.error = 'Usuario y/o contraseña incorrectos';
           this.loading = false;
-        }
-      });   
+        },
+      });
     }
   }
 
   Ir() {
-    console.log("Ir");
+    console.log('Ir');
     this.router.navigate(['libros']);
   }
 
   usuario(id: number) {
-    this.router.navigate(['usuarios'], { queryParams: { id: id ?? '0'  } });
+    this.router.navigate(['usuarios'], { queryParams: { id: id ?? '0' } });
   }
 
   contrasena(id: number) {
-    this.router.navigate(['usuarios'], { queryParams: { id: id ?? '0'  } });
+    this.router.navigate(['usuarios'], { queryParams: { id: id ?? '0' } });
   }
 }
-

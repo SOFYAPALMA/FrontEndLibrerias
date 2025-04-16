@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root'
 })
 export class AuthService {
-  private readonly API_URL = 'https://localhost:7033';
+  private readonly API_URL = 'https://localhost:7033/api/Auth';
   private currentUser: any = null;
 
   constructor(
@@ -41,9 +41,9 @@ export class AuthService {
       this.httpClient
         .post<RespuestaAPI>(
           this.API_URL +
-            '/Validate?Email=' +
+            '/Validate?correo=' +
             usuario.correo +
-            '&Clave=' +
+            '&clave=' +
             usuario.clave,
           {}
         )
